@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #8d99ae;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.MainMenuController">
+
+    <children>
+        <VBox alignment="CENTER" layoutX="0" layoutY="50.0" prefHeight="500.0" prefWidth="800.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+
+            <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" text="Menú Principal" />
+
+            <Button maxWidth="300" onAction="#onSolveProblem" style="-fx-background-color: #fbd1a2; -fx-text-fill: black; -fx-font-size: 16px; -fx-background-radius: 12;" text="Resolver Problema" />
+
+            <Button maxWidth="300" onAction="#onViewResults" style="-fx-background-color: #fbd1a2; -fx-text-fill: black; -fx-font-size: 16px; -fx-background-radius: 12;" text="Ver Resultados" />
+
+            <Button maxWidth="300" onAction="#onEditProfile" style="-fx-background-color: #fbd1a2; -fx-text-fill: black; -fx-font-size: 16px; -fx-background-radius: 12;" text="Modificar Perfil" />
+
+            <Button maxWidth="300" onAction="#onOpenCarta" style="-fx-background-color: #fbd1a2; -fx-text-fill: black; -fx-font-size: 16px; -fx-background-radius: 12;" text="Carta Nautica" />
+
+            <Button maxWidth="300" onAction="#onLogout" style="-fx-background-color: #fbd1a2; -fx-text-fill: black; -fx-font-size: 16px; -fx-background-radius: 12;" text="Cerrar Sesión" />
+
+            <ImageView fitHeight="100" fitWidth="100">
+                <image>
+                    <Image url="@../imagenes/logo_provisional.png" />
+                </image>
+            </ImageView>
+
+        </VBox>
+    </children>
+</AnchorPane>

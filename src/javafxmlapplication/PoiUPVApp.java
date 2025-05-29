@@ -38,7 +38,8 @@ public class PoiUPVApp extends Application {
         //======================================================================
         // 1- creación del grafo de escena a partir del fichero FXML
         PoiUPVApp.setPrimaryStage(stage);
-        FXMLLoader loader = new  FXMLLoader(getClass().getResource("/vistas/InicioFXML.fxml"));
+        FXMLLoader loader = new  FXMLLoader(getClass().getResource("/vistas/FXMLDocument.fxml"));
+        //FXMLLoader loader = new  FXMLLoader(getClass().getResource("/vistas/InicioFXML.fxml"));
         Parent root = loader.load();
         //======================================================================
         // 2- creación de la escena con el nodo raiz del grafo de escena

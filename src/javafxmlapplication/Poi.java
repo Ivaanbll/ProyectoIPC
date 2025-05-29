@@ -1,4 +1,4 @@
-package poiupv;
+package javafxmlapplication;
 import javafx.geometry.Point2D;
 
 /*
@@ -13,10 +13,11 @@ import javafx.geometry.Point2D;
  */
 public class Poi {
     
-    private String code;
-    private String description;
+    public String code;
+    public String description;
     
-    private Point2D position;
+    public Point2D position;
+
 
     /**
      * Get the value of position
@@ -74,16 +75,13 @@ public class Poi {
     }
     
     
-    Poi(String cod, String desc,double x, double y){
+    public Poi(String cod, String desc, double x, double y){
         code=cod;
         description=desc;
         position= new Point2D(x,y);
         
     }
 
-    Poi() {
-         
-    }
 
     @Override
     public String toString() {
@@ -91,6 +89,3 @@ public class Poi {
     }
     
 }
-
-    
-
