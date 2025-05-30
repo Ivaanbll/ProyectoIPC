@@ -4,11 +4,15 @@
  */
 package controladores;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafxmlapplication.PoiUPVApp;
 
 /**
  * FXML Controller class
@@ -26,7 +30,10 @@ public class MainMenuController implements Initializable {
     }    
 
     @FXML
-    private void onSolveProblem(ActionEvent event) {
+    private void onSolveProblem(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/FXMLDocument.fxml"));
+        Parent root = loader.load();
+        PoiUPVApp.setRoot(root, false);
     }
 
     @FXML

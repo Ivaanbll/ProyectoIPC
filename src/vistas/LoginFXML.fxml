@@ -151,7 +151,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" spacing="25.0" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
                <children>
-                  <Button fx:id="acceptButton" contentDisplay="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleAcceptButtonOnAction" prefWidth="100.0" style="-fx-background-color: #fbd1a2; -fx-text-fill: black;" text="Accept" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="acceptButton" contentDisplay="CENTER" disable="true" minWidth="80.0" mnemonicParsing="false" onAction="#handleAcceptButtonOnAction" prefWidth="100.0" style="-fx-background-color: #fbd1a2; -fx-text-fill: black;" text="Accept" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

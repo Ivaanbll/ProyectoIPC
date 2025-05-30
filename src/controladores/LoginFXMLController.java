@@ -1,6 +1,7 @@
 
 package controladores;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.YEARS;
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -20,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.util.converter.LocalDateStringConverter;
+import javafxmlapplication.PoiUPVApp;
 
 /**
  * FXML Controller class
@@ -125,6 +128,8 @@ public class LoginFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        acceptButton.disableProperty().set(false);
+        
         // TODO
         validEmail = new SimpleBooleanProperty(false);
         validPassword = new SimpleBooleanProperty(false);
@@ -190,6 +195,7 @@ public class LoginFXMLController implements Initializable {
         
                 });
         
+        acceptButton.disableProperty().bind(validEmail.or(validPassword).or(validDate).or(validNickname));
         
         
         
@@ -199,7 +205,7 @@ public class LoginFXMLController implements Initializable {
     
     
     @FXML
-    private void handleAcceptButtonOnAction(ActionEvent event) {
+    private void handleAcceptButtonOnAction(ActionEvent event) throws IOException {
         String email = emailField.getText();
         String nickname = nicknameField.getText();
         String password = passwordField.getText();
@@ -214,10 +220,13 @@ public class LoginFXMLController implements Initializable {
         validEmail.setValue(Boolean.FALSE);
         validPassword.setValue(Boolean.FALSE);
         validDate.setValue(Boolean.FALSE);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/InicioFXML.fxml"));
+        Parent root = loader.load();
+        PoiUPVApp.setRoot(root, false);
     }
 
     @FXML
-    private void handleCancelButtonOnAction(ActionEvent event) {
+    private void handleCancelButtonOnAction(ActionEvent event) throws IOException {
         emailField.clear();
         passwordField.clear();
         nicknameField.clear();
@@ -225,10 +234,11 @@ public class LoginFXMLController implements Initializable {
         validEmail.setValue(Boolean.FALSE);
         validPassword.setValue(Boolean.FALSE);
         validDate.setValue(Boolean.FALSE);
-        /*ESTAS LINEAS SERAN PARA CUANDO 
-        TENGAMOS LA PANTALLA PRINCIPAL*/
-       // FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
-       // Parent root = loader.load();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/InicioFXML.fxml"));
+        Parent root = loader.load();
+        PoiUPVApp.setRoot(root, false);
+
         
     }
     

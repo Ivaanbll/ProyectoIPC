@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="controladores.ModificarPerfilController"
+            style="-fx-background-color: #8d99ae;">
+    <children>
+        <VBox alignment="CENTER" spacing="15.0"
+              AnchorPane.leftAnchor="40" AnchorPane.rightAnchor="40" AnchorPane.topAnchor="30" AnchorPane.bottomAnchor="30">
+            <Label text="Modificar Perfil"
+                   style="-fx-font-size: 32px; -fx-text-fill: black; -fx-background-color: #fbd1a2; -fx-padding: 10px;"/>
+
+            <HBox spacing="10.0" alignment="CENTER_LEFT">
+                <Label text="Usuario:" style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+                <Label fx:id="nicknameLabel" style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+            </HBox>
+
+            <TextField fx:id="emailField" promptText="Nuevo Email" maxWidth="400"
+                       style="-fx-background-radius: 5; -fx-padding: 8; -fx-font-size: 14px;"/>
+
+            <PasswordField fx:id="passwordField" promptText="Nueva Contraseña" maxWidth="400"
+                           style="-fx-background-radius: 5; -fx-padding: 8; -fx-font-size: 14px;"/>
+
+            <DatePicker fx:id="birthdatePicker" promptText="Nueva Fecha de Nacimiento" maxWidth="400"
+                        style="-fx-background-radius: 5; -fx-font-size: 14px;"/>
+
+            <Button text="Cambiar Avatar" onAction="#onChangeAvatar" maxWidth="400"
+                    style="-fx-background-color: #fbd1a2; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+            <ImageView fx:id="avatarPreview" fitWidth="120" fitHeight="120"
+                       style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);"/>
+
+            <Label fx:id="errorLabel" textFill="red" style="-fx-font-size: 12px;"/>
+
+            <Button text="Guardar Cambios" onAction="#onSave" maxWidth="400"
+                    style="-fx-background-color: #fbd1a2; -fx-font-size: 16px; -fx-padding: 10; -fx-font-weight: bold;"/>
+
+            <Button text="Volver" onAction="#onBack" maxWidth="400"
+                    style="-fx-background-color: #fbd1a2; -fx-font-size: 16px; -fx-padding: 10; -fx-font-weight: bold;"/>
+        </VBox>
+    </children>
+</AnchorPane>
