@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafxmlapplication.PoiUPVApp;
 
 /**
@@ -20,6 +22,11 @@ import javafxmlapplication.PoiUPVApp;
  * @author ivanbofilloret
  */
 public class MainMenuController implements Initializable {
+
+    @FXML
+    private ImageView avatarUsuario;
+    @FXML
+    private Label nombreUsuario;
 
     /**
      * Initializes the controller class.
@@ -41,11 +48,17 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    private void onEditProfile(ActionEvent event) {
+    private void onEditProfile(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/modificarPerfilFXML.fxml"));
+        Parent root = loader.load();
+        PoiUPVApp.setRoot(root, false);
     }
 
     @FXML
-    private void onOpenCarta(ActionEvent event) {
+    private void onOpenCarta(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/FXMLDocument.fxml"));
+        Parent root = loader.load();
+        PoiUPVApp.setRoot(root, false);
     }
 
     @FXML

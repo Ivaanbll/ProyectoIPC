@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -20,7 +19,7 @@
    <children>
       <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #fbd1a2;">
          <children>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text=" Register form">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Registrarse">
                <font>
                   <Font name="Arial Rounded MT Bold" size="36.0" />
                </font>
@@ -55,7 +54,7 @@
                <children>
                   <VBox fillWidth="false">
                      <children>
-                        <Label style="-fx-font-weight: bold;" text="Email:*" textFill="WHITE">
+                        <Label prefHeight="15.0" prefWidth="51.0" style="-fx-font-weight: bold;" text="Email:" textFill="WHITE">
                            <font>
                               <Font size="12.0" />
                            </font></Label>
@@ -104,7 +103,7 @@
                <children>
                   <VBox fillWidth="false" prefHeight="41.0" prefWidth="223.0">
                      <children>
-                        <Label style="-fx-font-weight: bold;" text="Password:" textFill="WHITE">
+                        <Label prefHeight="15.0" prefWidth="65.0" style="-fx-font-weight: bold;" text="Password:" textFill="WHITE">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -131,12 +130,12 @@
                <children>
                   <VBox fillWidth="false">
                      <children>
-                        <Label style="-fx-font-weight: bold;" text="Birthdate:" textFill="WHITE">
+                        <Label style="-fx-font-weight: bold;" text="Birthdate*" textFill="WHITE">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Label>
-                        <DatePicker fx:id="dateField" prefWidth="120.0" promptText="dd/mm/yyyy" />
+                        <DatePicker fx:id="dateField" prefWidth="120.0" promptText="yyyy/mm/dd" />
                      </children>
                   </VBox>
                   <Label fx:id="dateErrorLabel" text="User must be 16 years old" textFill="#ca0505" translateY="5.0" visible="false">
@@ -151,12 +150,12 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" spacing="25.0" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
                <children>
-                  <Button fx:id="acceptButton" contentDisplay="CENTER" disable="true" minWidth="80.0" mnemonicParsing="false" onAction="#handleAcceptButtonOnAction" prefWidth="100.0" style="-fx-background-color: #fbd1a2; -fx-text-fill: black;" text="Accept" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="acceptButton" contentDisplay="CENTER" disable="true" minWidth="80.0" mnemonicParsing="false" onAction="#handleAcceptButtonOnAction" prefWidth="100.0" style="-fx-background-color: #fbd1a2; -fx-text-fill: black;" text="Aceptar" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="cancelButton" contentDisplay="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleCancelButtonOnAction" prefWidth="100.0" style="-fx-background-color: #fbd1a2; -fx-text-fill: black;" text="Cancel" textFill="WHITE">
+                  <Button fx:id="cancelButton" contentDisplay="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#handleCancelButtonOnAction" prefWidth="100.0" style="-fx-background-color: #fbd1a2; -fx-text-fill: black;" text="Cancelar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -170,8 +169,15 @@
                <children>
                   <VBox prefHeight="43.0" prefWidth="305.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="54.0" style="-fx-font-weight: bold;" text="Avatar:" textFill="WHITE" />
-                        <ComboBox fx:id="comboBox" prefWidth="150.0" />
+                        <Label prefHeight="17.0" prefWidth="115.0" style="-fx-font-weight: bold;" text="Avatar (opcional)" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin></Label>
+                        <Button fx:id="archivoButton" mnemonicParsing="false" onAction="#seleccionarAvatar" prefHeight="25.0" prefWidth="148.0" style="-fx-background-color: #fbd1a2; -fx-font-weight: bold;" text="Seleccionar archivo">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Button>
                      </children>
                   </VBox>
                </children>
@@ -179,6 +185,14 @@
                   <Insets left="12.0" />
                </padding>
             </HBox>
+            <Separator prefHeight="0.0" prefWidth="311.0" GridPane.rowIndex="5">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Separator>
          </children>
          <padding>
             <Insets bottom="24.0" left="12.0" right="12.0" top="12.0" />

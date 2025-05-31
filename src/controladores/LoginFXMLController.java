@@ -1,6 +1,7 @@
 
 package controladores;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 import javafx.util.converter.LocalDateStringConverter;
 import javafxmlapplication.PoiUPVApp;
 
@@ -51,7 +53,10 @@ public class LoginFXMLController implements Initializable {
     private Button acceptButton;
     @FXML
     private Button cancelButton;
-
+    @FXML
+    private Button archivoButton;
+    
+    
     
     private BooleanProperty validEmail;
     private ChangeListener<String> listenerEmail;
@@ -64,8 +69,8 @@ public class LoginFXMLController implements Initializable {
     
     private BooleanProperty validNickname;
     private ChangeListener<String> listenerNickname;
-    @FXML
-    private ComboBox<Image> comboBox;
+    
+    private String rutaImagen = null;
     
     
     private void checkEmail() {
@@ -128,7 +133,7 @@ public class LoginFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        acceptButton.disableProperty().set(false);
+        acceptButton.disableProperty().set(true);
         
         // TODO
         validEmail = new SimpleBooleanProperty(false);
@@ -145,7 +150,7 @@ public class LoginFXMLController implements Initializable {
                     //If it is not correct, a listener is added to the text or value 
                     //so that the field is validated while it is being edited.
                     if (listenerEmail == null) {
-                        listenerEmail = (a, b, c) -> checkEmail();
+                        listenerEmail = (a, b, c) -> checkPassword();
                         emailField.textProperty().addListener(listenerEmail);
                     }
                 }
@@ -159,7 +164,7 @@ public class LoginFXMLController implements Initializable {
                     //If it is not correct, a listener is added to the text or value 
                     //so that the field is validated while it is being edited.
                     if (listenerPassword == null) {
-                        listenerPassword = (a, b, c) -> checkEmail();
+                        listenerPassword = (a, b, c) -> checkPassword();
                         passwordField.textProperty().addListener(listenerPassword);
                     }
                 }
@@ -195,7 +200,9 @@ public class LoginFXMLController implements Initializable {
         
                 });
         
-        acceptButton.disableProperty().bind(validEmail.or(validPassword).or(validDate).or(validNickname));
+        acceptButton.disableProperty().bind(validEmail.not().or(validPassword.not()).or(validDate.not())
+        .or(validNickname.not()));
+
         
         
         
@@ -240,6 +247,17 @@ public class LoginFXMLController implements Initializable {
         PoiUPVApp.setRoot(root, false);
 
         
+    }
+
+    @FXML
+    private void seleccionarAvatar(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar imagen de perfil");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg"));
+        File selectedFile = fileChooser.showOpenDialog(((Node)event.getSource()).getScene().getWindow());
+        if(selectedFile != null) {
+        rutaImagen = selectedFile.getAbsolutePath();
+        }
     }
     
 }

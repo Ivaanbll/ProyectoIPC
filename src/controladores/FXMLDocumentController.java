@@ -5,6 +5,7 @@
  */
 package controladores;
 
+import clasesAuxiliares.ColorPickerDialog;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -113,6 +114,9 @@ public class FXMLDocumentController implements Initializable {
     private boolean modoExtremosActivo = false;
     private boolean reglaVisible = false;
     private double anguloRegla = 0;
+    private boolean cambioColor = false;
+    private boolean trazarLineaAngulo = false;
+    
 
 
 
@@ -206,6 +210,8 @@ public class FXMLDocumentController implements Initializable {
         contentGroup.getChildren().add(zoomGroup);
         zoomGroup.getChildren().add(map_scrollpane.getContent());
         map_scrollpane.setContent(contentGroup);
+        
+        //zoomGroup.getChildren().add(transportadorImg);
         
         
         // Codigo para el transportador
@@ -344,7 +350,6 @@ private void asignarListenersEliminacion(Node nodo) {
             drawingPane.setCursor(Cursor.HAND);
 
             if (nodo instanceof Circle circle) {
-                // Puntos y arcos
                 if (circle.getFill() != null && !circle.getFill().equals(Color.TRANSPARENT)) {
                     circle.setUserData(circle.getFill());
                     circle.setFill(colorHover);
@@ -352,11 +357,9 @@ private void asignarListenersEliminacion(Node nodo) {
                     circle.setUserData(circle.getStroke());
                     circle.setStroke(colorHover);
                 }
-
             } else if (nodo instanceof Line line) {
                 line.setUserData(line.getStroke());
                 line.setStroke(colorHover);
-
             } else if (nodo instanceof Text text) {
                 text.setUserData(text.getFill());
                 text.setFill(colorHover);
@@ -376,11 +379,9 @@ private void asignarListenersEliminacion(Node nodo) {
                     Color original = (Color) circle.getUserData();
                     if (original != null) circle.setStroke(original);
                 }
-
             } else if (nodo instanceof Line line) {
                 Color original = (Color) line.getUserData();
                 if (original != null) line.setStroke(original);
-
             } else if (nodo instanceof Text text) {
                 Color original = (Color) text.getUserData();
                 if (original != null) text.setFill(original);
@@ -394,9 +395,28 @@ private void asignarListenersEliminacion(Node nodo) {
             modoEliminarActivo = false;
             drawingPane.setCursor(Cursor.DEFAULT);
             e.consume();
+        } else if (cambioColor) {
+            Color nuevoColor = ColorPickerDialog.mostrar();
+
+            if (nodo instanceof Circle circle) {
+                if (circle.getFill() != null && !circle.getFill().equals(Color.TRANSPARENT)) {
+                    circle.setFill(nuevoColor);
+                } else {
+                    circle.setStroke(nuevoColor);
+                }
+            } else if (nodo instanceof Line line) {
+                line.setStroke(nuevoColor);
+            } else if (nodo instanceof Text text) {
+                text.setFill(nuevoColor);
+            }
+
+            cambioColor = false;
+            drawingPane.setCursor(Cursor.DEFAULT);
+            e.consume();
         }
     });
 }
+
 
 
 
@@ -473,7 +493,7 @@ if (modoArcoActivo) {
     return;
 }
 
-// --- ANOTAR TEXTO ---
+// --- Codigo para hacer las marcas de texto ---
 if (modoTextoActivo) {
     TextInputDialog dialog = new TextInputDialog();
     dialog.setTitle("Insertar texto");
@@ -556,6 +576,39 @@ if (modoExtremosActivo) {
     System.out.println("Extremos trazados desde (" + x + ", " + y + ")");
     return;
 }
+// --- Codigo para trazar lineas del angulo ---
+if (trazarLineaAngulo) {
+    TextInputDialog dialog = new TextInputDialog("45");
+    dialog.setTitle("Ángulo");
+    dialog.setHeaderText("Introduce el ángulo en grados:");
+    dialog.setContentText("Ángulo (0º = hacia la derecha, sentido antihorario):");
+
+    Optional<String> resultado = dialog.showAndWait();
+    if (resultado.isPresent()) {
+        try {
+            double angulo = Math.toRadians(Double.parseDouble(resultado.get()));
+            double longitud = 100; // longitud fija
+            double x2 = x + longitud * Math.cos(angulo);
+            double y2 = y - longitud * Math.sin(angulo); // eje Y invertido en JavaFX
+
+            Line linea = new Line(x, y, x2, y2);
+            linea.setStroke(Color.ORANGERED);
+            linea.setStrokeWidth(2.0);
+
+            asignarListenersEliminacion(linea);
+
+            drawingPane.getChildren().add(linea);
+        } catch (NumberFormatException ex) {
+            System.err.println("Ángulo inválido.");
+        }
+    }
+
+    trazarLineaAngulo = false;
+    drawingPane.setCursor(Cursor.DEFAULT);
+    return;
+}
+
+
 
 
 
@@ -624,6 +677,19 @@ private void activarModoEliminar() {
         drawingPane.setCursor(Cursor.OPEN_HAND);
     }
 
+    @FXML
+    private void modificarColor(ActionEvent event) {
+        cambioColor = true;
+        drawingPane.setCursor(Cursor.HAND);
+    }
+
+    @FXML
+    private void trazarAngulo(ActionEvent event) {
+        trazarLineaAngulo = true;
+        drawingPane.setCursor(Cursor.CROSSHAIR);
+    }
+
+    
 
 
 
